@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genesis — Conversao e Pricing</title>
+  <meta name="description" content="Genesis e o site standalone de conversao e pricing do ecossistema Benni OS." />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--obsidian:#09090b;--bone:#e8e1d5;--cobalt:#426bff;--gold:#c9a45c;--cyan:#00ffff;--lime:#00ff66;--ember:#b94a38;--surface:rgba(9,9,11,.92);--line:rgba(232,225,213,.14);--soft:rgba(232,225,213,.72)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth;overflow-x:hidden} body{margin:0;background:var(--obsidian);color:var(--bone);font-family:"Instrument Sans",sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none} img,video{max-width:100%;display:block}
+    :focus-visible{outline:3px solid var(--cyan);outline-offset:4px} .skip-link{position:absolute;left:-999px;top:12px;background:var(--bone);color:var(--obsidian);padding:.8rem 1rem;border-radius:8px;z-index:9999}.skip-link:focus{left:12px}
+    .nav{position:fixed;inset:0 0 auto;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:linear-gradient(180deg,rgba(9,9,11,.94),rgba(9,9,11,.58),transparent);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,225,213,.06);z-index:1000;font:12px/1 "IBM Plex Mono",monospace;letter-spacing:.14em}
+    .brand{font-family:"DM Serif Display",serif;font-size:1.6rem;letter-spacing:.03em}.pill{padding:6px 10px;border:1px solid rgba(66,107,255,.4);border-radius:999px;color:#8bb2ff;background:rgba(66,107,255,.12)} .nav-right{display:flex;gap:14px;align-items:center;color:#a1a1aa}
+    .hero{min-height:100svh;display:grid;place-items:center;padding:120px 4vw 72px;background:radial-gradient(circle at 20% 20%,rgba(66,107,255,.18),transparent 35%),radial-gradient(circle at 80% 10%,rgba(201,164,92,.12),transparent 28%),var(--obsidian)}
+    .hero-grid{width:min(1180px,100%);display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
+    .kicker{font:600 12px/1 "IBM Plex Mono",monospace;letter-spacing:.22em;color:#8bb2ff;text-transform:uppercase}.title{font-family:"DM Serif Display",serif;font-size:clamp(3rem,7vw,6.8rem);line-height:.95;margin:14px 0 18px;background:linear-gradient(135deg,#fff 0%,#d4af37 20%,#fff 38%,#426bff 60%,#d4af37 82%,#fff 100%);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 8s linear infinite}
+    .lead{font-size:clamp(1.05rem,1.35vw,1.35rem);line-height:1.65;color:var(--soft);max-width:54ch}.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.btn{min-height:52px;padding:0 18px;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:space-between;gap:14px;font:600 12px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;border-radius:0;transition:transform .22s ease,background .22s ease,border-color .22s ease;color:var(--bone)}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--bone);color:var(--obsidian);border-color:var(--bone)}.btn-ghost{background:rgba(232,225,213,.04)}
+    .hero-card{border:1px solid var(--line);background:rgba(232,225,213,.04);backdrop-filter:blur(10px);padding:28px;border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.35)} .status{display:flex;align-items:center;gap:10px;font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.2em;color:#a1a1aa}.dot{width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+    .metric{padding:18px 0;border-top:1px solid var(--line)} .metric strong{display:block;font-family:"DM Serif Display",serif;font-size:clamp(1.8rem,3vw,3rem);font-weight:400} .metric span{font-size:.95rem;color:var(--soft)}
+    .section{padding:96px 4vw} .wrap{width:min(1180px,100%);margin:0 auto} .section-title{font-family:"DM Serif Display",serif;font-size:clamp(2rem,4.8vw,4.4rem);line-height:1.02;margin:0 0 12px;background:linear-gradient(135deg,#fff 0%,#d4af37 20%,#426bff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .section-sub{margin:0 0 32px;color:var(--soft);max-width:64ch;font-size:1.05rem;line-height:1.7}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.panel{border:1px solid var(--line);border-radius:18px;background:rgba(232,225,213,.03);padding:24px;min-height:220px}.panel h3{margin:0 0 12px;font-family:"DM Serif Display",serif;font-size:1.8rem;font-weight:400}.panel p{margin:0;color:var(--soft);line-height:1.7}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}.price-card{position:relative;border:1px solid var(--line);border-radius:20px;background:rgba(232,225,213,.03);padding:26px;display:flex;flex-direction:column;min-height:420px}.price-card.featured{border-color:rgba(66,107,255,.5);box-shadow:0 0 0 1px rgba(66,107,255,.14),0 24px 80px rgba(66,107,255,.08)}.tag{display:inline-flex;align-self:flex-start;margin-bottom:16px;font:600 10px/1 "IBM Plex Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:#8bb2ff;background:rgba(66,107,255,.12);border:1px solid rgba(66,107,255,.25);padding:6px 9px;border-radius:999px}.price{font-family:"DM Serif Display",serif;font-size:3rem;line-height:1;margin:10px 0 10px}.period{font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.16em;color:#a1a1aa}.list{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:10px;color:var(--soft);line-height:1.5}.list li::before{content:"• ";color:var(--gold)} .spacer{flex:1}
+    .comparison{overflow:auto;border:1px solid var(--line);border-radius:18px}.comparison table{width:100%;border-collapse:collapse;background:rgba(232,225,213,.02)}.comparison th,.comparison td{padding:16px 18px;border-bottom:1px solid rgba(232,225,213,.08);text-align:left;font-size:.96rem}.comparison th{font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#8bb2ff;background:rgba(66,107,255,.08)}.comparison td{color:var(--soft)}.comparison td strong{color:var(--bone)}
+    .cta-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid var(--bone);border-bottom:1px solid var(--bone);padding:24px 0;margin-top:32px}.cta-strip .cta-title{font-family:"DM Serif Display",serif;font-size:clamp(1.6rem,3vw,3rem);margin:0}.footer{padding:44px 4vw 70px;border-top:1px solid var(--line);color:rgba(232,225,213,.55)}.footer a{color:#8bb2ff}
+    @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+    @media (max-width: 980px){.hero-grid,.feature-grid,.pricing-grid{grid-template-columns:1fr}.nav{height:64px;padding:0 5vw}.hero{padding-top:110px}.cta-strip{flex-direction:column;align-items:flex-start}}
+    @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.title{background:none;-webkit-text-fill-color:currentColor;color:var(--bone)}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteudo</a>
+  <header class="nav" role="banner">
+    <div class="brand">GENESIS</div>
+    <div class="nav-right"><span class="pill">CONVERSION</span><span>PRICING</span><span>BYOK</span></div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="hero-grid wrap">
+        <div>
+          <div class="kicker">BENNI OS · PRODUCT SITE</div>
+          <h1 class="title">Genesis converte mais rapido, com clareza editorial e pricing direto.</h1>
+          <p class="lead">Site standalone do Genesis para apresentar valor, capturar intencao e levar o usuario do interesse ao plano certo sem ruido. A marca mae continua no site oficial; aqui o foco e conversao, compra e expansao futura.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#pricing">Ver pricing</a>
+            <a class="btn btn-ghost" href="#features">Entender o produto</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <div class="status"><span class="dot"></span><span>LIVE · READY FOR LAUNCH</span></div>
+          <div class="metric"><strong>BYOK</strong><span>Usuario paga a propria inferencia; sua margem fica protegida.</span></div>
+          <div class="metric"><strong>+MRR</strong><span>Assinatura, time e lifetime para gerar caixa e previsibilidade.</span></div>
+          <div class="metric"><strong>Foco</strong><span>Conversao + preco + prova de valor, sem distracao de marca.</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="wrap">
+        <h2 class="section-title">O que o Genesis entrega</h2>
+        <p class="section-sub">O Genesis existe para vender o produto de forma clara. Ele herda a estetica premium do ecossistema Benni OS, mas simplifica a narrativa para a pessoa entender rapido o beneficio e agir.</p>
+        <div class="feature-grid">
+          <article class="panel">
+            <h3>Valor imediato</h3>
+            <p>O visitante ve logo o que o produto faz, por que importa e qual plano faz sentido para o seu perfil.</p>
+          </article>
+          <article class="panel">
+            <h3>Monetizacao limpa</h3>
+            <p>BYOK reduz custo variavel, assinatura cria MRR e lifetime ajuda a financiar o lancamento com caixa inicial.</p>
+          </article>
+          <article class="panel">
+            <h3>Conversao sem friccao</h3>
+            <p>CTA claro, hierarquia visual forte e trilha curta entre descoberta, prova e compra.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="wrap">
+        <h2 class="section-title">Pricing que vende</h2>
+        <p class="section-sub">A estrutura abaixo equilibra acessibilidade, margem e caixa. O plano gratuito entra como aquisicao; os pagos capturam valor; o lifetime acelera o inicio do projeto.</p>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <span class="tag">START</span>
+            <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Free</h3>
+            <div class="price">$0</div>
+            <div class="period">para explorar</div>
+            <ul class="list">
+              <li>BYOK obrigatorio.</li>
+              <li>Acesso basico ao produto.</li>
+              <li>Ideal para testar valor.</li>
+            </ul>
+            <div class="spacer"></div>
+            <a class="btn btn-ghost" href="#cta">Comecar gratis</a>
+          </article>
+          <article class="price-card featured">
+            <span class="tag">BEST VALUE</span>
+            <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Pro</h3>
+            <div class="price">$9</div>
+            <div class="period">por mes</div>
+            <ul class="list">
+              <li>Fluxo completo do Genesis.</li>
+              <li>Uso ilimitado das funcoes pagas.</li>
+              <li>Melhor relacao valor/preco.</li>
+            </ul>
+            <div class="spacer"></div>
+            <a class="btn btn-primary" href="#cta">Assinar Pro</a>
+          </article>
+          <article class="price-card">
+            <span class="tag">TEAM</span>
+            <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Team</h3>
+            <div class="price">$19</div>
+            <div class="period">por mes</div>
+            <ul class="list">
+              <li>Times pequenas e colaboracao.</li>
+              <li>Mais contexto, mais controle.</li>
+              <li>Melhor para operacao em grupo.</li>
+            </ul>
+            <div class="spacer"></div>
+            <a class="btn btn-ghost" href="#cta">Assinar Team</a>
+          </article>
+          <article class="price-card">
+            <span class="tag">EARLY</span>
+            <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Lifetime</h3>
+            <div class="price">$149</div>
+            <div class="period">pagamento unico</div>
+            <ul class="list">
+              <li>Oferta de caixa para early adopters.</li>
+              <li>Receita imediata no lancamento.</li>
+              <li>Disponibilidade limitada.</li>
+            </ul>
+            <div class="spacer"></div>
+            <a class="btn btn-ghost" href="#cta">Quero lifetime</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">Comparativo de planos</h2>
+        <p class="section-sub">A comparacao ajuda a reduzir indecisao e faz o usuario escolher pelo contexto, nao so pelo preco.</p>
+        <div class="comparison">
+          <table>
+            <thead>
+              <tr><th>Plano</th><th>Preco</th><th>Perfil</th><th>Objetivo</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Free</strong></td><td>$0</td><td>Curioso / teste</td><td>Aquisicao</td></tr>
+              <tr><td><strong>Pro</strong></td><td>$9/mes</td><td>Usuario individual</td><td>Conversao principal</td></tr>
+              <tr><td><strong>Team</strong></td><td>$19/mes</td><td>Pequena equipe</td><td>Expansao</td></tr>
+              <tr><td><strong>Lifetime</strong></td><td>$149</td><td>Early adopter</td><td>Caixa inicial</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="section">
+      <div class="wrap">
+        <div class="cta-strip">
+          <div>
+            <p class="kicker">NEXT STEP</p>
+            <h2 class="cta-title">Pronto para lancar o Genesis?</h2>
+          </div>
+          <a class="btn btn-primary" href="mailto:hello@benni-os.net">Receber acesso</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="wrap">Genesis e o site standalone do produto, enquanto a marca principal permanece no <a href="https://benni-os.github.io">site oficial Benni OS</a>.</div>
+  </footer>
+</body>
+</html>
