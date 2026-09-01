@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Genesis — Conversao e Pricing</title>
-  <meta name="description" content="Genesis e o site standalone de conversao e pricing do ecossistema Benni OS." />
+  <title>Genesis — Conversion and Pricing</title>
+  <meta name="description" content="Genesis is the standalone conversion and pricing site for the Benni OS ecosystem." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://benni-os.net/" />
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Genesis — Conversao e Pricing" />
-  <meta property="og:description" content="Site standalone de conversao e pricing do ecossistema Benni OS." />
+  <meta property="og:title" content="Genesis — Conversion and Pricing" />
+  <meta property="og:description" content="Standalone conversion and pricing site for the Benni OS ecosystem." />
   <meta property="og:url" content="https://benni-os.net/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://benni-os.net/og-image.png" />
@@ -20,8 +20,8 @@
   
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Genesis — Conversao e Pricing" />
-  <meta name="twitter:description" content="Site standalone de conversao e pricing do ecossistema Benni OS." />
+  <meta name="twitter:title" content="Genesis — Conversion and Pricing" />
+  <meta name="twitter:description" content="Standalone conversion and pricing site for the Benni OS ecosystem." />
   <meta name="twitter:image" content="https://benni-os.net/og-image.png" />
   
   <!-- Schema.org JSON-LD -->
@@ -31,7 +31,7 @@
     "@type": "WebSite",
     "name": "Genesis",
     "url": "https://benni-os.net/",
-    "description": "Site standalone de conversao e pricing do ecossistema Benni OS.",
+    "description": "Standalone conversion and pricing site for the Benni OS ecosystem.",
     "author": {
       "@type": "Organization",
       "name": "Benni OS"
@@ -39,7 +39,9 @@
     "sameAs": [
       "https://github.com/benni-os",
       "https://x.com/bennios"
-    ]
+    ],
+    "inLanguage": "en",
+    "availableLanguage": ["en", "pt-BR", "es"]
   }
   </script>
   
@@ -78,6 +80,10 @@
     
     :focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
     .skip-link{position:absolute;left:-999px;top:12px;background:var(--bone);color:var(--obsidian);padding:.8rem 1rem;border-radius:8px;z-index:9999}.skip-link:focus{left:12px}
+    
+    /* Language Selector */
+    .lang-selector{position:fixed;bottom:24px;right:24px;z-index:1001;display:flex;gap:8px;background:rgba(9,9,11,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;padding:6px}
+    .lang-btn{min-width:36px;height:36px;border:none;background:transparent;color:var(--muted);font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;cursor:pointer;border-radius:999px;transition:background .22s ease,color .22s ease}.lang-btn:hover{background:rgba(232,225,213,.08);color:var(--bone)}.lang-btn.active{background:var(--bone);color:var(--obsidian)}
     
     /* Navigation */
     .nav{position:fixed;inset:0 0 auto;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:linear-gradient(180deg,rgba(9,9,11,.94),rgba(9,9,11,.62),transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(232,225,213,.06);z-index:1000;font:12px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .4s ease}
@@ -133,7 +139,7 @@
     .comparison td{color:var(--soft)}.comparison td strong{color:var(--bone)}
     
     /* CTA */
-    .cta-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid var(--bone);border-bottom:1px solid var(--bone);padding:24px 0;margin-top:32px;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s ease,padding .25s ease}.cta-strip:hover{background:var(--bone);color:var(--obsidian);padding-left:24px;padding-right:24px}
+    .cta-strip{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid var(--bone);border-bottom:1px solid var(--bone);padding:24px 0;margin-top:32px;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s ease,padding .25s ease;cursor:pointer}.cta-strip:hover{background:var(--bone);color:var(--obsidian);padding-left:24px;padding-right:24px}
     .cta-strip .cta-title{font-family:"DM Serif Display",serif;font-size:clamp(1.6rem,3vw,3rem);margin:0}
     
     /* Footer */
@@ -148,6 +154,7 @@
       .nav{height:64px;padding:0 5vw}
       .hero{padding-top:110px}
       .cta-strip{flex-direction:column;align-items:flex-start}
+      .lang-selector{bottom:16px;right:16px}
     }
     
     /* Reduced Motion */
@@ -158,12 +165,19 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Pular para o conteudo</a>
+  <a class="skip-link" href="#main">Skip to content</a>
   
   <header class="nav" role="banner">
     <div class="brand">GENESIS</div>
     <div class="nav-right"><span class="pill">CONVERSION</span><span>PRICING</span><span>BYOK</span></div>
   </header>
+  
+  <!-- Language Selector -->
+  <div class="lang-selector" role="group" aria-label="Language selector">
+    <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+    <button class="lang-btn" data-lang="pt" aria-label="Portuguê·ªs">PT</button>
+    <button class="lang-btn" data-lang="es" aria-label="Españ·±·ol">ES</button>
+  </div>
   
   <main id="main">
     <!-- Hero -->
@@ -172,18 +186,18 @@
       <div class="hero-grid wrap">
         <div>
           <div class="kicker">BENNI OS · PRODUCT SITE</div>
-          <h1 class="title">Genesis converte mais rapido, com clareza editorial e pricing direto.</h1>
-          <p class="lead">Site standalone do Genesis para apresentar valor, capturar intencao e levar o usuario do interesse ao plano certo sem ruido. A marca mae continua no site oficial; aqui o foco e conversao, compra e expansao futura.</p>
+          <h1 class="title">Genesis converts faster with editorial clarity and direct pricing.</h1>
+          <p class="lead">Standalone site for Genesis to present value, capture intent, and guide users from interest to the right plan without noise. The parent brand stays on the official site; here the focus is conversion, purchase, and future expansion.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#pricing">Ver pricing</a>
-            <a class="btn btn-ghost" href="#features">Entender o produto</a>
+            <a class="btn btn-primary" href="#pricing">View pricing</a>
+            <a class="btn btn-ghost" href="#features">Understand the product</a>
           </div>
         </div>
         <aside class="hero-card">
           <div class="status"><span class="dot"></span><span>LIVE · READY FOR LAUNCH</span></div>
-          <div class="metric"><strong>BYOK</strong><span>Usuario paga a propria inferencia; sua margem fica protegida.</span></div>
-          <div class="metric"><strong>+MRR</strong><span>Assinatura, time e lifetime para gerar caixa e previsibilidade.</span></div>
-          <div class="metric"><strong>Foco</strong><span>Conversao + preco + prova de valor, sem distracao de marca.</span></div>
+          <div class="metric"><strong>BYOK</strong><span>Users pay for their own inference; your margin stays protected.</span></div>
+          <div class="metric"><strong>+MRR</strong><span>Subscription, team, and lifetime plans generate cash and predictability.</span></div>
+          <div class="metric"><strong>Focus</strong><span>Conversion + price + proof of value, without brand distraction.</span></div>
         </aside>
       </div>
     </section>
@@ -191,20 +205,20 @@
     <!-- Features -->
     <section id="features" class="section">
       <div class="wrap">
-        <h2 class="section-title">O que o Genesis entrega</h2>
-        <p class="section-sub">O Genesis existe para vender o produto de forma clara. Ele herda a estetica premium do ecossistema Benni OS, mas simplifica a narrativa para a pessoa entender rapido o beneficio e agir.</p>
+        <h2 class="section-title">What Genesis delivers</h2>
+        <p class="section-sub">Genesis exists to sell the product clearly. It inherits the premium aesthetic of the Benni OS ecosystem but simplifies the narrative so people quickly understand the benefit and act.</p>
         <div class="feature-grid">
           <article class="panel">
-            <h3>Valor imediato</h3>
-            <p>O visitante ve logo o que o produto faz, por que importa e qual plano faz sentido para o seu perfil.</p>
+            <h3>Immediate value</h3>
+            <p>Visitors immediately see what the product does, why it matters, and which plan makes sense for their profile.</p>
           </article>
           <article class="panel">
-            <h3>Monetizacao limpa</h3>
-            <p>BYOK reduz custo variavel, assinatura cria MRR e lifetime ajuda a financiar o lancamento com caixa inicial.</p>
+            <h3>Clean monetization</h3>
+            <p>BYOK reduces variable cost, subscription creates MRR, and lifetime helps fund the launch with initial cash.</p>
           </article>
           <article class="panel">
-            <h3>Conversao sem friccao</h3>
-            <p>CTA claro, hierarquia visual forte e trilha curta entre descoberta, prova e compra.</p>
+            <h3>Frictionless conversion</h3>
+            <p>Clear CTA, strong visual hierarchy, and a short path from discovery to proof to purchase.</p>
           </article>
         </div>
       </div>
@@ -213,60 +227,60 @@
     <!-- Pricing -->
     <section id="pricing" class="section">
       <div class="wrap">
-        <h2 class="section-title">Pricing que vende</h2>
-        <p class="section-sub">A estrutura abaixo equilibra acessibilidade, margem e caixa. O plano gratuito entra como aquisicao; os pagos capturam valor; o lifetime acelera o inicio do projeto.</p>
+        <h2 class="section-title">Pricing that sells</h2>
+        <p class="section-sub">The structure below balances accessibility, margin, and cash. The free plan serves as acquisition; paid plans capture value; lifetime accelerates project start.</p>
         <div class="pricing-grid">
           <article class="price-card">
             <span class="tag">START</span>
             <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Free</h3>
             <div class="price">$0</div>
-            <div class="period">para explorar</div>
+            <div class="period">to explore</div>
             <ul class="list">
-              <li>BYOK obrigatorio.</li>
-              <li>Acesso basico ao produto.</li>
-              <li>Ideal para testar valor.</li>
+              <li>BYOK required.</li>
+              <li>Basic product access.</li>
+              <li>Ideal for testing value.</li>
             </ul>
             <div class="spacer"></div>
-            <a class="btn btn-ghost" href="#cta">Comecar gratis</a>
+            <a class="btn btn-ghost" href="#cta">Start free</a>
           </article>
           <article class="price-card featured">
             <span class="tag">BEST VALUE</span>
             <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Pro</h3>
             <div class="price">$9</div>
-            <div class="period">por mes</div>
+            <div class="period">per month</div>
             <ul class="list">
-              <li>Fluxo completo do Genesis.</li>
-              <li>Uso ilimitado das funcoes pagas.</li>
-              <li>Melhor relacao valor/preco.</li>
+              <li>Full Genesis workflow.</li>
+              <li>Unlimited use of paid features.</li>
+              <li>Best value-to-price ratio.</li>
             </ul>
             <div class="spacer"></div>
-            <a class="btn btn-primary" href="#cta">Assinar Pro</a>
+            <a class="btn btn-primary" href="#cta">Subscribe Pro</a>
           </article>
           <article class="price-card">
             <span class="tag">TEAM</span>
             <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Team</h3>
             <div class="price">$19</div>
-            <div class="period">por mes</div>
+            <div class="period">per month</div>
             <ul class="list">
-              <li>Times pequenas e colaboracao.</li>
-              <li>Mais contexto, mais controle.</li>
-              <li>Melhor para operacao em grupo.</li>
+              <li>Small teams and collaboration.</li>
+              <li>More context, more control.</li>
+              <li>Better for group operations.</li>
             </ul>
             <div class="spacer"></div>
-            <a class="btn btn-ghost" href="#cta">Assinar Team</a>
+            <a class="btn btn-ghost" href="#cta">Subscribe Team</a>
           </article>
           <article class="price-card">
             <span class="tag">EARLY</span>
             <h3 class="section-title" style="font-size:2rem;margin-bottom:6px">Lifetime</h3>
             <div class="price">$149</div>
-            <div class="period">pagamento unico</div>
+            <div class="period">one-time payment</div>
             <ul class="list">
-              <li>Oferta de caixa para early adopters.</li>
-              <li>Receita imediata no lancamento.</li>
-              <li>Disponibilidade limitada.</li>
+              <li>Cash offer for early adopters.</li>
+              <li>Immediate revenue at launch.</li>
+              <li>Limited availability.</li>
             </ul>
             <div class="spacer"></div>
-            <a class="btn btn-ghost" href="#cta">Quero lifetime</a>
+            <a class="btn btn-ghost" href="#cta">Get lifetime</a>
           </article>
         </div>
       </div>
@@ -275,18 +289,18 @@
     <!-- Comparison -->
     <section class="section">
       <div class="wrap">
-        <h2 class="section-title">Comparativo de planos</h2>
-        <p class="section-sub">A comparacao ajuda a reduzir indecisao e faz o usuario escolher pelo contexto, nao so pelo preco.</p>
+        <h2 class="section-title">Plan comparison</h2>
+        <p class="section-sub">Comparison helps reduce indecision and lets users choose by context, not just price.</p>
         <div class="comparison">
           <table>
             <thead>
-              <tr><th>Plano</th><th>Preco</th><th>Perfil</th><th>Objetivo</th></tr>
+              <tr><th>Plan</th><th>Price</th><th>Profile</th><th>Objective</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>Free</strong></td><td>$0</td><td>Curioso / teste</td><td>Aquisicao</td></tr>
-              <tr><td><strong>Pro</strong></td><td>$9/mes</td><td>Usuario individual</td><td>Conversao principal</td></tr>
-              <tr><td><strong>Team</strong></td><td>$19/mes</td><td>Pequena equipe</td><td>Expansao</td></tr>
-              <tr><td><strong>Lifetime</strong></td><td>$149</td><td>Early adopter</td><td>Caixa inicial</td></tr>
+              <tr><td><strong>Free</strong></td><td>$0</td><td>Curious / testing</td><td>Acquisition</td></tr>
+              <tr><td><strong>Pro</strong></td><td>$9/mo</td><td>Individual user</td><td>Primary conversion</td></tr>
+              <tr><td><strong>Team</strong></td><td>$19/mo</td><td>Small team</td><td>Expansion</td></tr>
+              <tr><td><strong>Lifetime</strong></td><td>$149</td><td>Early adopter</td><td>Initial cash</td></tr>
             </tbody>
           </table>
         </div>
@@ -299,20 +313,237 @@
         <a class="cta-strip" href="mailto:hello@benni-os.net">
           <div>
             <p class="kicker">NEXT STEP</p>
-            <h2 class="cta-title">Pronto para lancar o Genesis?</h2>
+            <h2 class="cta-title">Ready to launch Genesis?</h2>
           </div>
-          <span class="btn btn-primary">Receber acesso →</span>
+          <span class="btn btn-primary">Get access →</span>
         </a>
       </div>
     </section>
   </main>
   
   <footer class="footer">
-    <div class="wrap">Genesis e o site standalone do produto, enquanto a marca principal permanece no <a href="https://benni-os.github.io">site oficial Benni OS</a>.</div>
+    <div class="wrap">Genesis is the standalone product site, while the main brand remains on the <a href="https://benni-os.github.io">official Benni OS site</a>.</div>
   </footer>
   
   <!-- Scripts -->
   <script>
+    // i18n Content
+    const i18n = {
+      en: {
+        kicker: "BENNI OS · PRODUCT SITE",
+        title: "Genesis converts faster with editorial clarity and direct pricing.",
+        lead: "Standalone site for Genesis to present value, capture intent, and guide users from interest to the right plan without noise. The parent brand stays on the official site; here the focus is conversion, purchase, and future expansion.",
+        btn1: "View pricing",
+        btn2: "Understand the product",
+        status: "LIVE · READY FOR LAUNCH",
+        m1t: "BYOK", m1d: "Users pay for their own inference; your margin stays protected.",
+        m2t: "+MRR", m2d: "Subscription, team, and lifetime plans generate cash and predictability.",
+        m3t: "Focus", m3d: "Conversion + price + proof of value, without brand distraction.",
+        fTitle: "What Genesis delivers",
+        fSub: "Genesis exists to sell the product clearly. It inherits the premium aesthetic of the Benni OS ecosystem but simplifies the narrative so people quickly understand the benefit and act.",
+        f1t: "Immediate value", f1d: "Visitors immediately see what the product does, why it matters, and which plan makes sense for their profile.",
+        f2t: "Clean monetization", f2d: "BYOK reduces variable cost, subscription creates MRR, and lifetime helps fund the launch with initial cash.",
+        f3t: "Frictionless conversion", f3d: "Clear CTA, strong visual hierarchy, and a short path from discovery to proof to purchase.",
+        pTitle: "Pricing that sells",
+        pSub: "The structure below balances accessibility, margin, and cash. The free plan serves as acquisition; paid plans capture value; lifetime accelerates project start.",
+        cTitle: "Plan comparison",
+        cSub: "Comparison helps reduce indecision and lets users choose by context, not just price.",
+        ctaKicker: "NEXT STEP",
+        ctaTitle: "Ready to launch Genesis?",
+        ctaBtn: "Get access →",
+        footer: "Genesis is the standalone product site, while the main brand remains on the",
+        footerLink: "official Benni OS site",
+        skip: "Skip to content",
+        nav1: "CONVERSION", nav2: "PRICING", nav3: "BYOK",
+        freeTag: "START", freeTitle: "Free", freePer: "to explore", free1: "BYOK required.", free2: "Basic product access.", free3: "Ideal for testing value.", freeBtn: "Start free",
+        proTag: "BEST VALUE", proTitle: "Pro", proPer: "per month", pro1: "Full Genesis workflow.", pro2: "Unlimited use of paid features.", pro3: "Best value-to-price ratio.", proBtn: "Subscribe Pro",
+        teamTag: "TEAM", teamTitle: "Team", teamPer: "per month", team1: "Small teams and collaboration.", team2: "More context, more control.", team3: "Better for group operations.", teamBtn: "Subscribe Team",
+        lifeTag: "EARLY", lifeTitle: "Lifetime", lifePer: "one-time payment", life1: "Cash offer for early adopters.", life2: "Immediate revenue at launch.", life3: "Limited availability.", lifeBtn: "Get lifetime",
+        th1: "Plan", th2: "Price", th3: "Profile", th4: "Objective",
+        row1: "Free", row1p: "$0", row1pr: "Curious / testing", row1o: "Acquisition",
+        row2: "Pro", row2p: "$9/mo", row2pr: "Individual user", row2o: "Primary conversion",
+        row3: "Team", row3p: "$19/mo", row3pr: "Small team", row3o: "Expansion",
+        row4: "Lifetime", row4p: "$149", row4pr: "Early adopter", row4o: "Initial cash"
+      },
+      pt: {
+        kicker: "BENNI OS · PRODUCT SITE",
+        title: "Genesis converte mais rápido, com clareza editorial e pricing direto.",
+        lead: "Site standalone do Genesis para apresentar valor, capturar intenção e levar o usuário do interesse ao plano certo sem ruí·´do. A marca mãe continua no site oficial; aqui o foco é conversã·´o, compra e expansã·´o futura.",
+        btn1: "Ver pricing",
+        btn2: "Entender o produto",
+        status: "LIVE · READY FOR LAUNCH",
+        m1t: "BYOK", m1d: "Usuá·´rio paga a própria inferê·´ncia; sua margem fica protegida.",
+        m2t: "+MRR", m2d: "Assinatura, time e lifetime para gerar caixa e previsibilidade.",
+        m3t: "Foco", m3d: "Conversã·´o + preço + prova de valor, sem distraç·´ã·´o de marca.",
+        fTitle: "O que o Genesis entrega",
+        fSub: "O Genesis existe para vender o produto de forma clara. Ele herda a estética premium do ecossistema Benni OS, mas simplifica a narrativa para a pessoa entender rápido o benefí·´cio e agir.",
+        f1t: "Valor imediato", f1d: "O visitante vê logo o que o produto faz, por que importa e qual plano faz sentido para o seu perfil.",
+        f2t: "Monetizaç·´ã·´o limpa", f2d: "BYOK reduz custo variá·´vel, assinatura cria MRR e lifetime ajuda a financiar o lanç' + 'amento com caixa inicial.",
+        f3t: "Conversã·´o sem fricç·´ã·´o", f3d: "CTA claro, hierarquia visual forte e trilha curta entre descoberta, prova e compra.",
+        pTitle: "Pricing que vende",
+        pSub: "A estrutura abaixo equilibra acessibilidade, margem e caixa. O plano gratuito entra como aquisiç·´ã·´o; os pagos capturam valor; o lifetime acelera o iní·´cio do projeto.",
+        cTitle: "Comparativo de planos",
+        cSub: "A comparaç·´ã·´o ajuda a reduzir indecisã·´o e faz o usuário escolher pelo contexto, nã·´o só pelo preç·´o.",
+        ctaKicker: "NEXT STEP",
+        ctaTitle: "Pronto para lanç' + 'ar o Genesis?",
+        ctaBtn: "Receber acesso →",
+        footer: "Genesis é o site standalone do produto, enquanto a marca principal permanece no",
+        footerLink: "site oficial Benni OS",
+        skip: "Pular para o conteudo",
+        nav1: "CONVERSION", nav2: "PRICING", nav3: "BYOK",
+        freeTag: "START", freeTitle: "Free", freePer: "para explorar", free1: "BYOK obrigatorio.", free2: "Acesso basico ao produto.", free3: "Ideal para testar valor.", freeBtn: "Comecar gratis",
+        proTag: "BEST VALUE", proTitle: "Pro", proPer: "por mes", pro1: "Fluxo completo do Genesis.", pro2: "Uso ilimitado das funcoes pagas.", pro3: "Melhor relacao valor/preco.", proBtn: "Assinar Pro",
+        teamTag: "TEAM", teamTitle: "Team", teamPer: "por mes", team1: "Times pequenas e colaboracao.", team2: "Mais contexto, mais controle.", team3: "Melhor para operacao em grupo.", teamBtn: "Assinar Team",
+        lifeTag: "EARLY", lifeTitle: "Lifetime", lifePer: "pagamento unico", life1: "Oferta de caixa para early adopters.", life2: "Receita imediata no lancamento.", life3: "Disponibilidade limitada.", lifeBtn: "Quero lifetime",
+        th1: "Plano", th2: "Preco", th3: "Perfil", th4: "Objetivo",
+        row1: "Free", row1p: "$0", row1pr: "Curioso / teste", row1o: "Aquisicao",
+        row2: "Pro", row2p: "$9/mes", row2pr: "Usuario individual", row2o: "Conversao principal",
+        row3: "Team", row3p: "$19/mes", row3pr: "Pequena equipe", row3o: "Expansao",
+        row4: "Lifetime", row4p: "$149", row4pr: "Early adopter", row4o: "Caixa inicial"
+      },
+      es: {
+        kicker: "BENNI OS · PRODUCT SITE",
+        title: "Genesis convierte más rápido con claridad editorial y pricing directo.",
+        lead: "Sitio independiente de Genesis para presentar valor, capturar intención y guiar al usuario desde el interés hasta el plan correcto sin ruido. La marca principal permanece en el sitio oficial; aquí el enfoque es conversió·±·n, compra y expansió·±·n futura.",
+        btn1: "Ver pricing",
+        btn2: "Entender el producto",
+        status: "LIVE · READY FOR LAUNCH",
+        m1t: "BYOK", m1d: "El usuario paga su propia inferencia; tu margen queda protegido.",
+        m2t: "+MRR", m2d: "Suscripció·±·n, equipo y lifetime para generar caja y previsibilidad.",
+        m3t: "Enfoque", m3d: "Conversió·±·n + precio + prueba de valor, sin distracció·±·n de marca.",
+        fTitle: "Lo que Genesis entrega",
+        fSub: "Genesis existe para vender el producto de forma clara. Hereda la estética premium del ecosistema Benni OS, pero simplifica la narrativa para que la persona entienda rápido el beneficio y actue.",
+        f1t: "Valor inmediato", f1d: "El visitante ve inmediatamente qué hace el producto, por qué importa y qué plan tiene sentido para su perfil.",
+        f2t: "Monetizació·±·n limpia", f2d: "BYOK reduce costo variable, la suscripció·±·n crea MRR y el lifetime ayuda a financiar el lanzamiento con caja inicial.",
+        f3t: "Conversió·±·n sin fricció·±·n", f3d: "CTA claro, jerarquí·´a visual fuerte y trayectoria corta entre descubrimiento, prueba y compra.",
+        pTitle: "Pricing que vende",
+        pSub: "La estructura abajo equilibra accesibilidad, margen y caja. El plan gratuito entra como adquisició·±·n; los pagos capturan valor; el lifetime acelera el inicio del proyecto.",
+        cTitle: "Comparativo de planes",
+        cSub: "La comparació·±·n ayuda a reducir indecisió·±·n y hace que el usuario elija por contexto, no solo por precio.",
+        ctaKicker: "NEXT STEP",
+        ctaTitle: "Listo para lanzar Genesis?",
+        ctaBtn: "Recibir acceso →",
+        footer: "Genesis es el sitio independiente del producto, mientras la marca principal permanece en el",
+        footerLink: "sitio oficial Benni OS",
+        skip: "Saltar al contenido",
+        nav1: "CONVERSION", nav2: "PRICING", nav3: "BYOK",
+        freeTag: "START", freeTitle: "Free", freePer: "para explorar", free1: "BYOK obligatorio.", free2: "Acceso básico al producto.", free3: "Ideal para probar valor.", freeBtn: "Empezar gratis",
+        proTag: "BEST VALUE", proTitle: "Pro", proPer: "por mes", pro1: "Flujo completo de Genesis.", pro2: "Uso ilimitado de funciones pagas.", pro3: "Mejor relación valor/precio.", proBtn: "Suscribir Pro",
+        teamTag: "TEAM", teamTitle: "Team", teamPer: "por mes", team1: "Equipos pequeños y colaboración.", team2: "Mas contexto, mas control.", team3: "Mejor para operación en grupo.", teamBtn: "Suscribir Team",
+        lifeTag: "EARLY", lifeTitle: "Lifetime", lifePer: "pago único", life1: "Oferta de caja para early adopters.", life2: "Ingreso inmediato en el lanzamiento.", life3: "Disponibilidad limitada.", lifeBtn: "Quiero lifetime",
+        th1: "Plan", th2: "Precio", th3: "Perfil", th4: "Objetivo",
+        row1: "Free", row1p: "$0", row1pr: "Curioso / prueba", row1o: "Adquisició·±·n",
+        row2: "Pro", row2p: "$9/mes", row2pr: "Usuario individual", row2o: "Conversió·±·n principal",
+        row3: "Team", row3p: "$19/mes", row3pr: "Equipo pequeño", row3o: "Expansió·±·n",
+        row4: "Lifetime", row4p: "$149", row4pr: "Early adopter", row4o: "Caja inicial"
+      }
+    };
+    
+    // Language Switcher
+    let currentLang = "en";
+    const langBtns = document.querySelectorAll(".lang-btn");
+    
+    function updateContent(lang) {
+      const t = i18n[lang];
+      document.querySelector(".kicker").textContent = t.kicker;
+      document.querySelector(".title").textContent = t.title;
+      document.querySelector(".lead").textContent = t.lead;
+      document.querySelector(".hero-actions .btn:nth-child(1)").textContent = t.btn1;
+      document.querySelector(".hero-actions .btn:nth-child(2)").textContent = t.btn2;
+      document.querySelector(".status span:last-child").textContent = t.status;
+      document.querySelectorAll(".metric strong")[0].textContent = t.m1t;
+      document.querySelectorAll(".metric span")[0].textContent = t.m1d;
+      document.querySelectorAll(".metric strong")[1].textContent = t.m2t;
+      document.querySelectorAll(".metric span")[1].textContent = t.m2d;
+      document.querySelectorAll(".metric strong")[2].textContent = t.m3t;
+      document.querySelectorAll(".metric span")[2].textContent = t.m3d;
+      document.querySelectorAll(".section-title")[0].textContent = t.fTitle;
+      document.querySelectorAll(".section-sub")[0].textContent = t.fSub;
+      document.querySelectorAll(".panel h3")[0].textContent = t.f1t;
+      document.querySelectorAll(".panel p")[0].textContent = t.f1d;
+      document.querySelectorAll(".panel h3")[1].textContent = t.f2t;
+      document.querySelectorAll(".panel p")[1].textContent = t.f2d;
+      document.querySelectorAll(".panel h3")[2].textContent = t.f3t;
+      document.querySelectorAll(".panel p")[2].textContent = t.f3d;
+      document.querySelectorAll(".section-title")[1].textContent = t.pTitle;
+      document.querySelectorAll(".section-sub")[1].textContent = t.pSub;
+      document.querySelectorAll(".price-card .tag")[0].textContent = t.freeTag;
+      document.querySelectorAll(".price-card .section-title")[0].textContent = t.freeTitle;
+      document.querySelectorAll(".price-card .period")[0].textContent = t.freePer;
+      document.querySelectorAll(".price-card .list li")[0].textContent = t.free1;
+      document.querySelectorAll(".price-card .list li")[1].textContent = t.free2;
+      document.querySelectorAll(".price-card .list li")[2].textContent = t.free3;
+      document.querySelectorAll(".price-card .btn")[0].textContent = t.freeBtn;
+      document.querySelectorAll(".price-card .tag")[1].textContent = t.proTag;
+      document.querySelectorAll(".price-card .section-title")[1].textContent = t.proTitle;
+      document.querySelectorAll(".price-card .period")[1].textContent = t.proPer;
+      document.querySelectorAll(".price-card .list li")[3].textContent = t.pro1;
+      document.querySelectorAll(".price-card .list li")[4].textContent = t.pro2;
+      document.querySelectorAll(".price-card .list li")[5].textContent = t.pro3;
+      document.querySelectorAll(".price-card .btn")[1].textContent = t.proBtn;
+      document.querySelectorAll(".price-card .tag")[2].textContent = t.teamTag;
+      document.querySelectorAll(".price-card .section-title")[2].textContent = t.teamTitle;
+      document.querySelectorAll(".price-card .period")[2].textContent = t.teamPer;
+      document.querySelectorAll(".price-card .list li")[6].textContent = t.team1;
+      document.querySelectorAll(".price-card .list li")[7].textContent = t.team2;
+      document.querySelectorAll(".price-card .list li")[8].textContent = t.team3;
+      document.querySelectorAll(".price-card .btn")[2].textContent = t.teamBtn;
+      document.querySelectorAll(".price-card .tag")[3].textContent = t.lifeTag;
+      document.querySelectorAll(".price-card .section-title")[3].textContent = t.lifeTitle;
+      document.querySelectorAll(".price-card .period")[3].textContent = t.lifePer;
+      document.querySelectorAll(".price-card .list li")[9].textContent = t.life1;
+      document.querySelectorAll(".price-card .list li")[10].textContent = t.life2;
+      document.querySelectorAll(".price-card .list li")[11].textContent = t.life3;
+      document.querySelectorAll(".price-card .btn")[3].textContent = t.lifeBtn;
+      document.querySelectorAll(".section-title")[2].textContent = t.cTitle;
+      document.querySelectorAll(".section-sub")[2].textContent = t.cSub;
+      document.querySelectorAll(".comparison th")[0].textContent = t.th1;
+      document.querySelectorAll(".comparison th")[1].textContent = t.th2;
+      document.querySelectorAll(".comparison th")[2].textContent = t.th3;
+      document.querySelectorAll(".comparison th")[3].textContent = t.th4;
+      document.querySelectorAll(".comparison tbody tr")[0].children[0].textContent = t.row1;
+      document.querySelectorAll(".comparison tbody tr")[0].children[1].textContent = t.row1p;
+      document.querySelectorAll(".comparison tbody tr")[0].children[2].textContent = t.row1pr;
+      document.querySelectorAll(".comparison tbody tr")[0].children[3].textContent = t.row1o;
+      document.querySelectorAll(".comparison tbody tr")[1].children[0].textContent = t.row2;
+      document.querySelectorAll(".comparison tbody tr")[1].children[1].textContent = t.row2p;
+      document.querySelectorAll(".comparison tbody tr")[1].children[2].textContent = t.row2pr;
+      document.querySelectorAll(".comparison tbody tr")[1].children[3].textContent = t.row2o;
+      document.querySelectorAll(".comparison tbody tr")[2].children[0].textContent = t.row3;
+      document.querySelectorAll(".comparison tbody tr")[2].children[1].textContent = t.row3p;
+      document.querySelectorAll(".comparison tbody tr")[2].children[2].textContent = t.row3pr;
+      document.querySelectorAll(".comparison tbody tr")[2].children[3].textContent = t.row3o;
+      document.querySelectorAll(".comparison tbody tr")[3].children[0].textContent = t.row4;
+      document.querySelectorAll(".comparison tbody tr")[3].children[1].textContent = t.row4p;
+      document.querySelectorAll(".comparison tbody tr")[3].children[2].textContent = t.row4pr;
+      document.querySelectorAll(".comparison tbody tr")[3].children[3].textContent = t.row4o;
+      document.querySelectorAll(".cta-strip .kicker")[0].textContent = t.ctaKicker;
+      document.querySelectorAll(".cta-strip .cta-title")[0].textContent = t.ctaTitle;
+      document.querySelectorAll(".cta-strip .btn")[0].textContent = t.ctaBtn;
+      document.querySelector(".footer .wrap").innerHTML = t.footer + ' <a href="https://benni-os.github.io">' + t.footerLink + '</a>.';
+      document.querySelector(".skip-link").textContent = t.skip;
+      document.querySelectorAll(".nav-right span")[0].textContent = t.nav1;
+      document.querySelectorAll(".nav-right span")[1].textContent = t.nav2;
+      document.querySelectorAll(".nav-right span")[2].textContent = t.nav3;
+      
+      // Update HTML lang attribute
+      document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
+    }
+    
+    langBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.dataset.lang;
+        currentLang = lang;
+        langBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        updateContent(lang);
+        
+        // Re-trigger animations
+        gsap.from(".title", {opacity: 0, y: 32, duration: 1, ease: "power3.out", delay: 0.2});
+        gsap.from(".lead", {opacity: 0, y: 28, duration: 0.9, ease: "power3.out", delay: 0.4});
+      });
+    });
+    
     // Lenis Smooth Scroll
     const lenis = new Lenis({
       duration: 1.2,
@@ -336,118 +567,46 @@
     gsap.registerPlugin(ScrollTrigger);
     
     // Hero reveal
-    gsap.from(".kicker", {
-      opacity: 0,
-      y: 24,
-      duration: 0.8,
-      ease: "power3.out",
-      delay: 0.2
-    });
-    
-    gsap.from(".title", {
-      opacity: 0,
-      y: 32,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.4
-    });
-    
-    gsap.from(".lead", {
-      opacity: 0,
-      y: 28,
-      duration: 0.9,
-      ease: "power3.out",
-      delay: 0.6
-    });
-    
-    gsap.from(".hero-actions .btn", {
-      opacity: 0,
-      y: 20,
-      duration: 0.7,
-      ease: "power3.out",
-      stagger: 0.12,
-      delay: 0.8
-    });
-    
-    gsap.from(".hero-card", {
-      opacity: 0,
-      x: 40,
-      duration: 1.1,
-      ease: "power3.out",
-      delay: 0.5
-    });
+    gsap.from(".kicker", {opacity: 0, y: 24, duration: 0.8, ease: "power3.out", delay: 0.2});
+    gsap.from(".title", {opacity: 0, y: 32, duration: 1, ease: "power3.out", delay: 0.4});
+    gsap.from(".lead", {opacity: 0, y: 28, duration: 0.9, ease: "power3.out", delay: 0.6});
+    gsap.from(".hero-actions .btn", {opacity: 0, y: 20, duration: 0.7, ease: "power3.out", stagger: 0.12, delay: 0.8});
+    gsap.from(".hero-card", {opacity: 0, x: 40, duration: 1.1, ease: "power3.out", delay: 0.5});
     
     // Section titles reveal
     gsap.utils.toArray(".section-title").forEach(title => {
       gsap.from(title, {
-        scrollTrigger: {
-          trigger: title,
-          start: "top 85%",
-          toggleActions: "play none none none"
-        },
-        opacity: 0,
-        y: 32,
-        duration: 0.9,
-        ease: "power3.out"
+        scrollTrigger: {trigger: title, start: "top 85%", toggleActions: "play none none none"},
+        opacity: 0, y: 32, duration: 0.9, ease: "power3.out"
       });
     });
     
     // Panels reveal
     gsap.utils.toArray(".panel").forEach((panel, i) => {
       gsap.from(panel, {
-        scrollTrigger: {
-          trigger: panel,
-          start: "top 90%",
-          toggleActions: "play none none none"
-        },
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: i * 0.1
+        scrollTrigger: {trigger: panel, start: "top 90%", toggleActions: "play none none none"},
+        opacity: 0, y: 40, duration: 0.8, ease: "power3.out", delay: i * 0.1
       });
     });
     
     // Price cards reveal
     gsap.utils.toArray(".price-card").forEach((card, i) => {
       gsap.from(card, {
-        scrollTrigger: {
-          trigger: card,
-          start: "top 90%",
-          toggleActions: "play none none none"
-        },
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: i * 0.08
+        scrollTrigger: {trigger: card, start: "top 90%", toggleActions: "play none none none"},
+        opacity: 0, y: 40, duration: 0.8, ease: "power3.out", delay: i * 0.08
       });
     });
     
     // Comparison table reveal
     gsap.from(".comparison", {
-      scrollTrigger: {
-        trigger: ".comparison",
-        start: "top 85%",
-        toggleActions: "play none none none"
-      },
-      opacity: 0,
-      y: 32,
-      duration: 0.9,
-      ease: "power3.out"
+      scrollTrigger: {trigger: ".comparison", start: "top 85%", toggleActions: "play none none none"},
+      opacity: 0, y: 32, duration: 0.9, ease: "power3.out"
     });
     
     // CTA reveal
     gsap.from(".cta-strip", {
-      scrollTrigger: {
-        trigger: ".cta-strip",
-        start: "top 85%",
-        toggleActions: "play none none none"
-      },
-      opacity: 0,
-      y: 28,
-      duration: 0.8,
-      ease: "power3.out"
+      scrollTrigger: {trigger: ".cta-strip", start: "top 85%", toggleActions: "play none none none"},
+      opacity: 0, y: 28, duration: 0.8, ease: "power3.out"
     });
     
     // Nav hide on scroll down
